@@ -11,28 +11,16 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            text-align: center;
         }
         header {
             background-color: #4b0082;
             padding: 20px;
-            text-align: center;
             font-size: 2em;
-            color: #fff;
-            width: 100%;
-        }
-        header p {
-            font-size: 0.5em;
-            margin-top: 10px;
             color: #fff;
         }
         .content {
             padding: 20px;
-            text-align: center;
         }
         .button {
             background-color: #8a2be2;
@@ -41,12 +29,9 @@
             padding: 15px 30px;
             display: inline-block;
             font-size: 16px;
-            margin: 10px 5px;
+            margin: 10px;
             cursor: pointer;
             border-radius: 5px;
-        }
-        .hidden {
-            display: none;
         }
         footer {
             background-color: #4b0082;
@@ -57,13 +42,16 @@
             bottom: 0;
             width: 100%;
         }
+        #follower-form {
+            display: none;
+        }
     </style>
     <script>
         let adClickCount = 0;
         let coins = 0;
 
         function showForm() {
-            document.getElementById('follower-form').classList.remove('hidden');
+            document.getElementById('follower-form').style.display = 'block';
         }
 
         function watchAd() {
@@ -79,22 +67,31 @@
         function sendFollower() {
             const name = document.getElementById('name-input').value;
             alert("Name sent: " + name);
-            coins = 0;
-            document.getElementById('coin-count').innerText = coins;
+            document.getElementById('name-input').value = '';
+            document.getElementById('coin-count').innerText = '0';
             document.getElementById('send-btn').disabled = true;
         }
     </script>
 </head>
 <body>
+    <header>
+        Followers +
+        <p>Rules: One ad one coin, ten ads one follower</p>
+    </header>
 
-<header>
-    Followers +
-    <p>Rules: One ad one coin, ten ads one follower</p>
-</header>
+    <div class="content">
+        <button class="button" onclick="showForm()">Get Followers</button>
 
-<div class="content">
-    <button class="button" onclick="showForm()">Get Followers</button>
+        <div id="follower-form">
+            <input type="text" id="name-input" placeholder="Enter your name" /><br />
+            <button class="button" onclick="watchAd()">Watch Ad for Followers</button><br />
+            <p>Coins: <span id="coin-count">0</span></p>
+            <button class="button" id="send-btn" onclick="sendFollower()" disabled>Send</button>
+        </div>
+    </div>
 
-    <div id="follower-form" class="hidden">
-        <input type="text" id="name-input" placeholder="Enter your name" /><br />
-        <button class="button" onclick="watchAd()">Watch Ad for Followers</
+    <footer>
+        &copy; 2024 Followers +. All rights reserved.
+    </footer>
+</body>
+</html>
